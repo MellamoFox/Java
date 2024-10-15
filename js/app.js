@@ -3,29 +3,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectDemos = document.querySelectorAll('.project-demo');
     const animatedBox = document.querySelector('.animated-box');
     
-    // Анимация появления карточек навыков и проектов
+    // Animación de aparición de tarjetas de habilidades y proyectos.
     [...skillCards, ...projectDemos].forEach((element, index) => {
         setTimeout(() => {
             element.classList.add('animate-in');
         }, index * 200);
     });
 
-    // Инициализация часов
+    // Inicialización de relojes.
     initClock();
 
-    // Инициализация куба 3D
+    // Inicialización de un cubo 3D.
     initCubeAnimation();
 
-    // Инициализация интерфейса перетаскивания
+    // Inicialización de la interfaz de arrastrar y soltar.
     initDragAndDrop();
 
-    // Инициализация кастомного слайдера
+    // Inicialización de la interfaz de arrastrar y soltar.
     initCustomSlider();
 
-    // Инициализация карты скретча
+    // Inicialización de una tarjeta de rasca y gana.
     initScratchCard();
 
-    // Анимация при наведении на анимированную коробку
+    // Animación al pasar el cursor sobre una caja animada.
     if (animatedBox) {
         animatedBox.addEventListener('mouseover', () => {
             animatedBox.style.backgroundColor = '#ff0044';
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             animatedBox.style.transform = 'scale(1)';
         });
         
-        // Обработка для мобильных устройств
+        // Adaptación para dispositivos móviles.
         animatedBox.addEventListener('touchstart', () => {
             animatedBox.style.backgroundColor = '#ff0044';
             animatedBox.style.transform = 'scale(1.1)';
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Функция для часов
+// Función para el reloj.
 function initClock() {
     const hourHand = document.querySelector('.hour-hand');
     const minuteHand = document.querySelector('.minute-hand');
@@ -75,7 +75,7 @@ function initClock() {
     updateClock();
 }
 
-// Функция для анимации куба 3D
+// Función para la animación del cubo 3D.
 function initCubeAnimation() {
     const cube = document.querySelector('.cube');
     let rotation = { x: 0, y: 0 };
@@ -87,7 +87,7 @@ function initCubeAnimation() {
         cube.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
     });
 
-    // Поддержка для сенсорных экранов
+    // Soporte para pantallas táctiles.
     cube.addEventListener('touchmove', (event) => {
         const touch = event.touches[0];
         const sensitivity = 0.1;
@@ -97,7 +97,7 @@ function initCubeAnimation() {
     });
 }
 
-// Функция для интерфейса перетаскивания
+// Función para la interfaz de arrastrar y soltar.
 function initDragAndDrop() {
     const draggable = document.querySelector('.draggable');
     const dropZone = document.querySelector('.drop-zone');
@@ -125,7 +125,7 @@ function initDragAndDrop() {
         dropZone.textContent = '¡Elemento soltado!';
     });
 
-    // Поддержка для сенсорных устройств
+    // Soporte para dispositivos táctiles.
     draggable.addEventListener('touchstart', () => {
         draggable.classList.add('dragging');
     });
@@ -141,7 +141,7 @@ function initDragAndDrop() {
         event.preventDefault();
         draggable.classList.remove('dragging');
         
-        // Проверка, находится ли draggable в dropZone
+        // Verificación de si el elemento draggable está en la zona de drop (dropZone).
         const rect = dropZone.getBoundingClientRect();
         const draggableRect = draggable.getBoundingClientRect();
 
@@ -156,7 +156,7 @@ function initDragAndDrop() {
     });
 }
 
-// Функция для кастомного слайдера
+// Función para el deslizador personalizado.
 function initCustomSlider() {
     const slider = document.querySelector('.custom-slider');
     const sliderValue = document.querySelector('.slider-value');
@@ -166,7 +166,7 @@ function initCustomSlider() {
     });
 }
 
-// Функция для карты скретча с поддержкой сенсорных экранов
+// Función para la tarjeta de rasca y gana con soporte para pantallas táctiles.
 function initScratchCard() {
     const canvas = document.querySelector('.scratch-card');
     const container = document.querySelector('.demo-box');
@@ -175,23 +175,23 @@ function initScratchCard() {
         const image = new Image();
         image.src = 'https://studionomad.kz/public/images/picture/blog/5507-web%20(1).jpg';
 
-        // Подгоняем размер canvas под размер контейнера
+        // Ajustamos el tamaño del canvas al tamaño del contenedor.
         canvas.width = container.offsetWidth;
         canvas.height = container.offsetHeight;
 
         image.onload = () => {
-            // Отображаем изображение в canvas
+            // Mostrando imagen en canvas.
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-            // Создаем черный слой поверх изображения
+            // Creamos una capa negra sobre la imagen
             ctx.globalCompositeOperation = 'source-over';
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Устанавливаем режим для стирания
+            // Establecemos el modo de borrado.
             ctx.globalCompositeOperation = 'destination-out';
 
-            // Добавляем обработчики для мыши и сенсорных устройств
+            // Añadimos controladores para ratón y dispositivos táctiles.
             addScratchListeners(canvas, ctx);
         };
     }
@@ -232,13 +232,13 @@ function addScratchListeners(canvas, ctx) {
         ctx.fill();
     }
 
-    // Обработчики для мыши
+    // Controladores para el ratón.
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mousemove', scratch);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mouseleave', stopDrawing);
 
-    // Обработчики для сенсорных устройств
+    // Controladores para dispositivos táctiles.
     canvas.addEventListener('touchstart', (event) => {
         event.preventDefault();
         startDrawing(event);
